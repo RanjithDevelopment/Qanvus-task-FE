@@ -1,7 +1,7 @@
 .tableContainer{
     display: flex;
     flex-direction: column;
-    width: 100vh;
+    width: 175vh;
     height: 130vh;
     margin: auto;
     margin-top: 30px;

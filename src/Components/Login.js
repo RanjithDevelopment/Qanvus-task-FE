@@ -36,7 +36,7 @@ const Login = () => {
   };
   //Login Submission 
   const handlesumit =async () => {
-   await axios.post("https://qanvus-task-api.onrender.com/api/user/signin",{...Logindata})
+   await axios.post("https://digital-avenue-task-api.onrender.com/api/user/signin",{...Logindata})
   .then((response)=>{
     localStorage.setItem("token",response.data);
 
@@ -44,7 +44,7 @@ const token = localStorage.getItem("token");
 
 const existuser = jwtDecode(token);
  
-navigate('/products' ) 
+navigate('/tasks' ) 
   })
   .catch((error)=>{
     alert(error.response.data.msg)

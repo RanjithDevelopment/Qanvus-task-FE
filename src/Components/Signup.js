@@ -3,13 +3,13 @@ import "../Css/LoginStyles.css";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from './Navbar';
 import axios from "axios";
+
 const Signup = () => {
     const navigate = useNavigate();
     let signupValues = {
         name: "",
         email: "",
         phoneNo: "",
-        dateOfBirth: "",
         password: "",
         confrimPassword: "",
 
@@ -17,7 +17,6 @@ const Signup = () => {
             name: "",
             email: "",
             phoneNo: "",
-            dateOfBirth: "",
             password: "",
             confrimPassword: "",
         }
@@ -60,11 +59,12 @@ const Signup = () => {
         if (phone.length < 10 || phone.length > 10) return false
         return true
     }
+
     //Login Submission 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const response = axios.post("https://qanvus-task-api.onrender.com/api/user/signup", { ...formdata })
+        const response = axios.post("https://digital-avenue-task-api.onrender.com/api/user/signup", { ...formdata })
             .then((response) => {
                 if (response.status === 200) {
                     // Handle successful response
@@ -93,6 +93,7 @@ const Signup = () => {
             <br />
             <div className="page">
                 <form onSubmit={(e) => handleSubmit(e)}>
+                    <div id='sign-in-button'></div>
                     <div className="cover" >
                         <h1>SignUp Here !</h1>
 
@@ -111,15 +112,7 @@ const Signup = () => {
                             onChange={(e) => commonchange(e)}
                             value={formdata.phoneNo} />
                         <span style={{ color: "red" }}>{formdata.error.phoneNo}</span>
-                        <input
-                            type='text'
-                            placeholder='dd/mm/yyy'
-                            name='dateOfBirth'
-                            onChange={(e) => commonchange(e)}
-                            value={formdata.dateOfBirth}
-
-                        />
-                        <span style={{ color: "red" }}>{formdata.error.dateOfBirth}</span>
+                        
                         <input type="password" placeholder="password"
                             name="password"
                             onChange={(e) => commonchange(e)}

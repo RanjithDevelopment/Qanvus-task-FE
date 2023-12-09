@@ -53,14 +53,14 @@ input  {
     text-align: center;
    padding: 2em;
 }
-select{
+textarea{
     border: none;
     color: white;
     background-color:black;
-    height: 4em;
+    height: 7em;
     width: 80%;
     border-radius: 0.25em;
-    text-align: center;
+    text-align: left;
     
 }
 input ,select:focus{

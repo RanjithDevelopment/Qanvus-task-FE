@@ -37,14 +37,12 @@ const handleLogout =()=>{
             <Link to='/signup'>Sign Up</Link>
         </li>
         <li>
-            <Link to='/createproduct'>Add Product</Link>
+            <Link to='/addtasks'>Add Task</Link>
         </li>
         <li>
-            <Link to='/products'>View Products</Link>
+            <Link to='/tasks'>View Tasks</Link>
         </li>
-        <li>
-            <Link to='/changePassword'>Change Password</Link>
-        </li>
+        
         <li>
            <h3 style={{color:"white"}} onClick={handleLogout} >LogOut</h3>
         </li>

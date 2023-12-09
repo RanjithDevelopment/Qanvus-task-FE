@@ -7,29 +7,37 @@ import Navbar from './Navbar';
 
 const Table = () => {
     const token = localStorage.getItem("token")
-    const [ProductDatas, setproductDatas] = useState([]);
+    const [tasksDatas, settasksDatas] = useState([]);
     
     const history = useNavigate();
     useEffect(() => {
         async function getData() {
-             await axios.get("https://qanvus-task-api.onrender.com/api/products/get",{
+             await axios.get("https://digital-avenue-task-api.onrender.com/api/tasks/get",{
                 headers:{
                     accesstoken: token,
                 }
-            }).then((response)=>setproductDatas(response.data))
+            }).then((response)=>settasksDatas(response.data))
               .catch((error)=>alert(error.response.data.msg))
             ;
         }
+       console.log(tasksDatas);
+
         getData()
     }, [])
     //to handle delete
     const handleDelete = async (id) => {
-        await axios.delete(`https://qanvus-task-api.onrender.com/api/products/delete/${id}`,{
-            headers:{
-                accesstoken: token,
-            }
-        })
-            .then(() => history('/products')).catch((error) => alert(JSON.stringify(error)));
+        try {
+            await axios.delete(`https://digital-avenue-task-api.onrender.com/api/tasks/delete/${id}`,{
+                headers:{
+                    accesstoken: token,
+                }
+            })
+                .then(() => window.location.reload()).catch((error) => alert(JSON.stringify(error)));
+        } catch (error) {
+            alert(error.response.data.msg)
+            
+        }
+       
     }
    
     return (
@@ -43,29 +51,32 @@ const Table = () => {
             <div className='tableContainer'>
                 <table>
                     <tr>
-                        <th>ProductName</th>
-                        <th>Image</th> 
-                        <th>quantity</th>
-                        <th>Discount</th>
-                        <th>Price</th>
-                        
+                        <th>Id</th>
+                        <th>Tile</th>
+                        <th>Description</th> 
+                        <th>dueDate</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th>Completed</th>
                         <th>Actions</th>
                     </tr>
-                    {ProductDatas.map((data) => {
+                    {tasksDatas.map((data) => {
 
                         return (
                             <tbody key={data._id}>
                                 <tr >
-                                    <td>{data.productName}</td>
-                                    <td>{data.image}</td>
-                                    <td>{data.quantity}</td>
-                                    <td>{data.discount}</td>
-                                    <td>{data.price}</td>
+                                    <td>{data._id}</td>
+                                    <td>{data.taskTitle}</td>
+                                    <td>{data.description}</td>
+                                    <td>{data.dueDate}</td>
+                                    <td>{data.createdAt}</td>
+                                    <td>{data.updatedAt?data.updatedAt:" "}</td>
+                                    <td>{data.completed?"true":"false"}</td>
                                     <td>
                                         <Link
                                             className='edit'
-                                            to="/createproduct" state={data}  >
-                                            Update Tracking
+                                            to="/addtasks" state={data}  >
+                                            Update Task
                                         </Link>
                                         <Link
                                             className='delete'
